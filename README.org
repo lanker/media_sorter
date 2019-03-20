@@ -1,0 +1,123 @@
+* Media sorter
+Media sorter sorts media files (only JPG images with EXIF data, for now) by
+extracting information from the files and make a directory structure with
+symbolic links based on the information.
+
+At the moment, only location is used for sorting. This, of course,
+requires that the EXIF contains GPS information.
+
+** Usage
+
+#+begin_src text
+$ media_sorter <input directory> <output directory>
+#+end_src
+
+Where input is the directory containing unsorted images. No subdirectories
+are visited.
+
+Output is where the directory structure and the symbolic links will be
+created.
+
+** Example
+You have a directory looking like this:
+
+#+begin_src text
+$ ls /home/lanker/all_photos
+...
+DSC_2210.JPG
+DSC_2211.JPG
+DSC_2212.JPG
+DSC_2213.JPG
+DSC_2214.JPG
+DSC_2215.JPG
+DSC_2216.JPG
+DSC_2217.JPG
+DSC_2218.JPG
+DSC_2219.JPG
+DSC_2220.JPG
+DSC_2221.JPG
+DSC_2222.JPG
+DSC_2223.JPG
+DSC_2224.JPG
+DSC_2225.JPG
+DSC_2226.JPG
+DSC_2227.JPG
+DSC_2228.JPG
+DSC_2229.JPG
+DSC_2230.JPG
+DSC_2231.JPG
+DSC_2232.JPG
+DSC_2233.JPG
+DSC_2234.JPG
+DSC_2235.JPG
+DSC_2236.JPG
+DSC_2237.JPG
+DSC_2238.JPG
+DSC_2239.JPG
+...
+#+end_src
+
+I.e., no sorting...
+
+You run:
+
+#+begin_src text
+$ media_sorter /home/lanker/all_photos/ out/
+#+end_src
+
+Which generates this:
+#+begin_src text
+$ tree out
+.
+├── SE
+│   ├── Skane
+│   │   ├── Lund
+│   │   │   └── DSC_2121.JPG -> /home/lanker/all_photos/DSC_2121.JPG
+│   │   └── Beddingestrand
+│   │       ├── DSC_2110.JPG -> /home/lanker/all_photos/DSC_2110.JPG
+│   │       ├── DSC_2111.JPG -> /home/lanker/all_photos/DSC_2111.JPG
+│   │       ├── DSC_2112.JPG -> /home/lanker/all_photos/DSC_2112.JPG
+│   │       ├── DSC_2113.JPG -> /home/lanker/all_photos/DSC_2113.JPG
+│   │       ├── DSC_2114.JPG -> /home/lanker/all_photos/DSC_2114.JPG
+│   │       ├── DSC_2115.JPG -> /home/lanker/all_photos/DSC_2115.JPG
+│   │       ├── DSC_2116.JPG -> /home/lanker/all_photos/DSC_2116.JPG
+│   │       ├── DSC_2117.JPG -> /home/lanker/all_photos/DSC_2117.JPG
+│   │       ├── DSC_2118.JPG -> /home/lanker/all_photos/DSC_2118.JPG
+│   │       └── DSC_2119.JPG -> /home/lanker/all_photos/DSC_2119.JPG
+│   └── Stockholm
+│       └── Stockholm
+│           ├── DSC_2122.JPG -> /home/lanker/all_photos/DSC_2122.JPG
+│           ├── DSC_2123.JPG -> /home/lanker/all_photos/DSC_2123.JPG
+│           ├── DSC_2124.JPG -> /home/lanker/all_photos/DSC_2124.JPG
+│           ├── DSC_2125.JPG -> /home/lanker/all_photos/DSC_2125.JPG
+│           ├── DSC_2126.JPG -> /home/lanker/all_photos/DSC_2126.JPG
+│           ├── DSC_2127.JPG -> /home/lanker/all_photos/DSC_2127.JPG
+│           ├── DSC_2129.JPG -> /home/lanker/all_photos/DSC_2129.JPG
+│           ├── DSC_2130.JPG -> /home/lanker/all_photos/DSC_2130.JPG
+│           ├── DSC_2133.JPG -> /home/lanker/all_photos/DSC_2133.JPG
+│           ├── DSC_2134.JPG -> /home/lanker/all_photos/DSC_2134.JPG
+│           ├── DSC_2135.JPG -> /home/lanker/all_photos/DSC_2135.JPG
+│           ├── DSC_2136.JPG -> /home/lanker/all_photos/DSC_2136.JPG
+│           ├── DSC_2137.JPG -> /home/lanker/all_photos/DSC_2137.JPG
+│           ├── DSC_2138.JPG -> /home/lanker/all_photos/DSC_2138.JPG
+│           └── DSC_2139.JPG -> /home/lanker/all_photos/DSC_2139.JPG
+└── unknown_location
+    ├── DSC_2120.JPG -> /home/lanker/all_photos/DSC_2120.JPG
+    ├── DSC_2128.JPG -> /home/lanker/all_photos/DSC_2128.JPG
+    ├── DSC_2131.JPG -> /home/lanker/all_photos/DSC_2131.JPG
+    └── DSC_2132.JPG -> /home/lanker/all_photos/DSC_2132.JPG
+#+end_src
+
+** Building
+
+#+begin_src text
+$ cargo build --release
+#+end_src
+
+** Credits
+Includes an older version of [[https://github.com/llambda/rrgeo]] for offline
+reverse geocoding.
+
+** License
+    - geocoder.rs & cities.csv: MIT License
+    - The rest: GNU General Public License v3 (GPL-3)
