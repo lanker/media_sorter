@@ -1,7 +1,3 @@
-extern crate kdtree;
-extern crate time;
-extern crate rexiv2;
-
 use reverse_geocoder::ReverseGeocoder;
 
 use std::path::Path;

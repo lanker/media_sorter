@@ -3,8 +3,6 @@ use std::path::Path;
 
 use reverse_geocoder::ReverseGeocoder;
 
-extern crate rexiv2;
-
 pub fn process(path: &Path, target_dir: &Path, geocoder: &ReverseGeocoder) -> bool {
     match rexiv2::Metadata::new_from_path(path) {
         Ok(meta) => {
