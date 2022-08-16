@@ -30,9 +30,14 @@ pub fn process(path: &Path, target_dir: &Path, geocoder: &ReverseGeocoder) -> bo
     }
 }
 
+pub fn finish() {
+    println!("Exif done!");
+}
+
 pub fn setup() -> Plugin {
     Plugin {
         pattern: "jpg".to_string(),
         handle: process,
+        finish,
     }
 }

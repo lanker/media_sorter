@@ -12,6 +12,7 @@ use reverse_geocoder::ReverseGeocoder;
 pub struct Plugin {
     pattern: String,
     handle: fn(&Path, &Path, &ReverseGeocoder) -> bool,
+    finish: fn(),
 }
 
 impl fmt::Display for Plugin {
@@ -64,5 +65,8 @@ fn main() {
                 (p.handle)(path.as_path(), dir_out_path, &geocoder);
             }
         }
+    }
+    for p in &plugins {
+        (p.finish)();
     }
 }
