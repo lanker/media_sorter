@@ -2,7 +2,7 @@ extern crate kdtree;
 extern crate time;
 extern crate rexiv2;
 
-use crate::geocoder::ReverseGeocoder;
+use reverse_geocoder::ReverseGeocoder;
 
 use std::path::Path;
 use std::os::unix::fs;
@@ -32,10 +32,10 @@ pub fn link_by_location(
 {
     match path.file_name() {
         Some(filename) => {
-            let y = geocoder.search(&[latitude, longitude]).expect("Nothing found.");
+            let y = geocoder.search((latitude, longitude)).expect("Nothing found.").record;
 
             let mut dst_dir = target_dir.to_path_buf();
-            dst_dir.push(y.admin3.as_str());
+            dst_dir.push(y.cc.as_str());
             dst_dir.push(y.admin1.as_str());
             dst_dir.push(y.name.as_str());
 

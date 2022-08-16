@@ -2,7 +2,7 @@
 name = "media_sorter"
 version = "0.1.0"
 authors = ["Fredrik Lanker <fredrik@lanker.se>"]
-edition = "2018"
+edition = "2021"
 
 [dependencies]
 rexiv2 = "0.7.0"
@@ -13,3 +13,4 @@ time = "~0.1.36"
 iron = "~0.5.1"
 queryst = "~1.0.1"
 lazy_static = "~0.2.1"
+reverse_geocoder = "3"
