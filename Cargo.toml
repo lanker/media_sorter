@@ -5,12 +5,5 @@ authors = ["Fredrik Lanker <fredrik@lanker.se>"]
 edition = "2021"
 
 [dependencies]
-rexiv2 = "0.7.0"
-kdtree = "~0.3.1"
-quick-csv = "~0.1.6"
-rustc-serialize = "~0.3.22"
-time = "~0.1.36"
-iron = "~0.5.1"
-queryst = "~1.0.1"
-lazy_static = "~0.2.1"
+rexiv2 = "0.9"
 reverse_geocoder = "3"
