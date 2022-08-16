@@ -9,11 +9,11 @@ pub fn process(path: &Path, target_dir: &Path, geocoder: &ReverseGeocoder) -> bo
             match meta.get_gps_info() {
                 None => {
                     // no gps info in exif
-                    crate::utils::link_by_location_unknown(&path, target_dir);
+                    crate::utils::link_by_location_unknown(path, target_dir);
                 }
                 Some(gps) => {
                     crate::utils::link_by_location(
-                        &path,
+                        path,
                         target_dir,
                         gps.latitude,
                         gps.longitude,
@@ -21,13 +21,13 @@ pub fn process(path: &Path, target_dir: &Path, geocoder: &ReverseGeocoder) -> bo
                     );
                 }
             }
+            true
         }
         Err(_) => {
             println!("No metadata");
-            return false;
+            false
         }
     }
-    return true;
 }
 
 pub fn setup() -> Plugin {

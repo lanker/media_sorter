@@ -49,21 +49,19 @@ fn main() {
 
     plugins.push(exif::setup());
 
-    for entry in paths {
-        if let Ok(entry) = entry {
-            let path = entry.path();
-            let ext = match path.extension() {
-                Some(ext) => ext,
-                None => continue,
-            };
-            let ext_str = match ext.to_str() {
-                Some(ext_str) => ext_str.to_lowercase(),
-                None => continue,
-            };
-            for p in &plugins {
-                if p.pattern.to_lowercase() == ext_str {
-                    (p.handle)(path.as_path(), dir_out_path, &geocoder);
-                }
+    for entry in paths.flatten() {
+        let path = entry.path();
+        let ext = match path.extension() {
+            Some(ext) => ext,
+            None => continue,
+        };
+        let ext_str = match ext.to_str() {
+            Some(ext_str) => ext_str.to_lowercase(),
+            None => continue,
+        };
+        for p in &plugins {
+            if p.pattern.to_lowercase() == ext_str {
+                (p.handle)(path.as_path(), dir_out_path, &geocoder);
             }
         }
     }
