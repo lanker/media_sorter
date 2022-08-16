@@ -9,12 +9,12 @@ pub fn link_by_location_unknown(path: &Path, target_dir: &Path) -> bool {
             let dst_dir = target_dir.join("unknown_location");
             let mut dst_file = dst_dir.clone();
             dst_file.push(filename);
-            create_link(&path, &dst_dir, &dst_file);
-            return true;
+            create_link(path, &dst_dir, &dst_file);
+            true
         }
         None => {
             println!("Error..");
-            return false;
+            false
         }
     }
 }
@@ -40,7 +40,7 @@ pub fn link_by_location(
 
             let mut dst_file = dst_dir.clone();
             dst_file.push(filename);
-            create_link(&path, &dst_dir, &dst_file);
+            create_link(path, &dst_dir, &dst_file);
         }
         None => {
             println!("Error..");
