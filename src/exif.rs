@@ -1,8 +1,7 @@
 use crate::Plugin;
 use std::path::Path;
 
-use crate::geocoder;
-use geocoder::ReverseGeocoder;
+use reverse_geocoder::ReverseGeocoder;
 
 extern crate rexiv2;
 

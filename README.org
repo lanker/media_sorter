@@ -115,9 +115,7 @@ $ cargo build --release
 #+end_src
 
 ** Credits
-Includes an older version of [[https://github.com/llambda/rrgeo]] for offline
-reverse geocoding.
+Uses https://github.com/gx0r/rrgeo for offline reverse geocoding.
 
 ** License
-    - geocoder.rs & cities.csv: MIT License
-    - The rest: GNU General Public License v3 (GPL-3)
+GNU General Public License v3 (GPL-3)

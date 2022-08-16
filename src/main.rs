@@ -6,9 +6,8 @@ use std::path::Path;
 
 mod exif;
 mod utils;
-mod geocoder;
-use geocoder::Locations;
-use geocoder::ReverseGeocoder;
+use reverse_geocoder::Locations;
+use reverse_geocoder::ReverseGeocoder;
 
 pub struct Plugin {
     pattern: String,
@@ -43,7 +42,7 @@ fn main() {
         }
     };
 
-    let loc = Locations::from_file();
+    let loc = Locations::from_memory();
     let geocoder = ReverseGeocoder::new(&loc);
 
     let mut plugins = Vec::new();
