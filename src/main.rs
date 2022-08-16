@@ -1,8 +1,8 @@
 use std::env;
 use std::fmt;
-use std::process;
 use std::fs;
 use std::path::Path;
+use std::process;
 
 mod exif;
 mod utils;
@@ -54,11 +54,11 @@ fn main() {
             let path = entry.path();
             let ext = match path.extension() {
                 Some(ext) => ext,
-                None => continue
+                None => continue,
             };
             let ext_str = match ext.to_str() {
                 Some(ext_str) => ext_str.to_lowercase(),
-                None => continue
+                None => continue,
             };
             for p in &plugins {
                 if p.pattern.to_lowercase() == ext_str {
