@@ -6,13 +6,11 @@ use std::process;
 
 mod exif;
 mod utils;
-use reverse_geocoder::Locations;
-use reverse_geocoder::ReverseGeocoder;
 
 pub struct Plugin {
     pattern: String,
-    handle: fn(&Path, &Path, &ReverseGeocoder) -> bool,
-    finish: fn(),
+    handle: fn(&Path, &Path) -> bool,
+    finish: fn(&Path),
 }
 
 impl fmt::Display for Plugin {
@@ -43,12 +41,7 @@ fn main() {
         }
     };
 
-    let loc = Locations::from_memory();
-    let geocoder = ReverseGeocoder::new(&loc);
-
-    let mut plugins = Vec::new();
-
-    plugins.push(exif::setup());
+    let plugins = vec![exif::setup()];
 
     for entry in paths.flatten() {
         let path = entry.path();
@@ -62,11 +55,12 @@ fn main() {
         };
         for p in &plugins {
             if p.pattern.to_lowercase() == ext_str {
-                (p.handle)(path.as_path(), dir_out_path, &geocoder);
+                (p.handle)(path.as_path(), dir_out_path);
             }
         }
     }
+
     for p in &plugins {
-        (p.finish)();
+        (p.finish)(dir_out_path);
     }
 }
